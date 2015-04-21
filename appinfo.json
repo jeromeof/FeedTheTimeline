@@ -1,0 +1,30 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "jerome.oflaherty@gmail.com",
+    "longName": "FeedTheTimeline",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/feedthetimeline.png",
+                "menuIcon": true,
+                "name": "APP_ICON",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "FeedTheTimeline",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "5f4ec77b-dcfa-4174-8ccc-cc48ec6ea85e",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
