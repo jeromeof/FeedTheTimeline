@@ -3,7 +3,8 @@ Pebble.addEventListener("ready", function(e) {
 })
 
 Pebble.addEventListener('showConfiguration', function(e) {
-	Pebble.getTimelineToken(
+    console.log("config");
+  	Pebble.getTimelineToken(
 	  function (token) {
   		  var URL = 'http://feedthetimeline.appspot.com/config?token=' + token;
 		  console.log('Configuration window opened. ' + URL);
@@ -13,18 +14,23 @@ Pebble.addEventListener('showConfiguration', function(e) {
     	console.log('Error getting timeline token: ' + error);
 	  }
 	);
+
 });
 
 Pebble.addEventListener("webviewclosed", function(e) {
     console.log("configuration closed");
     if (e.response != '') {
+		console.log('Response' + e.response);
 		var configuration = JSON.parse(decodeURIComponent(e.response));
+		console.log('subscriptions' + configuration.subscriptions);
 		var subscriptions = configuration.subscriptions;
 		
 		// First get our current subscriptions
 		Pebble.timelineSubscriptions(
 	    	function (topics) {
 	    	
+          console.log('Current Topics' + topics);
+          
 	    		// First go through current topics and see if we need to remove any
 	    		for (var t = 0; t < topics.length; t++) {
 	    			var topic = topics[t];
@@ -35,7 +41,7 @@ Pebble.addEventListener("webviewclosed", function(e) {
   								console.log('Unsubscribed from ' + topic);
 							}, 
 				    		function (errorString) { 
-					    		console.log('Error unsubscribing from topic: ' + errorString);
+					    		console.log('Error unsubscribing from topic: ' + topic + ' Error:' + errorString);
 			  				}
 						);
 					}
@@ -45,19 +51,22 @@ Pebble.addEventListener("webviewclosed", function(e) {
 					var subscription = subscriptions[s];
 	    			// If our subscription isn't found then subscribe to him
 	    			if (topics.indexOf(subscription) == -1) {
+              
+              console.log('Subscribing to:' + subscription);
+              
 	 		    		Pebble.timelineSubscribe(subscription,
 				    		function () { 
   								console.log('Subscribed from ' + subscription);
 							}, 
 				    		function (errorString) { 
-					    		console.log('Error subscribing from topic: ' + errorString);
+			                  console.log('Error subscribing for topic: ' + subscription + ' Error:'+ errorString);
 			  				}
 						);
 	    			}
 				}
 		    }, 
   			function (errorString) { 
-			    console.log('Error unsubscribing from topic: ' + errorString);
+			    console.log('Error retrieving Subscriptions? '+ errorString);
 		  }
 		);
     } else {
