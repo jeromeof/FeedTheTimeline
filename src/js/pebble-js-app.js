@@ -1,3 +1,7 @@
+Pebble.addEventListener("ready", function(e) {
+    console.log("Ready");
+})
+
 Pebble.addEventListener('showConfiguration', function(e) {
 	Pebble.getTimelineToken(
 	  function (token) {
