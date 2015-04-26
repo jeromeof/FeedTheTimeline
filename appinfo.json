@@ -26,6 +26,6 @@
     "versionLabel": "1.0",
     "watchapp": {
         "watchface": false,
-        “hiddenApp”: true
+        "hiddenApp": true
     }
 }
