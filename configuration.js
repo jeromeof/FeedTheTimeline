@@ -2,6 +2,7 @@ Pebble.addEventListener('showConfiguration', function(e) {
 	Pebble.getTimelineToken(
 	  function (token) {
   		  var URL = 'http://feedthetimeline.appspot.com/config?token=' + token;
+		  console.log('Configuration window opened. ' + URL);
 		  Pebble.openURL(URL);
 	  },
 	  function (error) { 
