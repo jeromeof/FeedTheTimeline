@@ -20,7 +20,6 @@ Pebble.addEventListener('showConfiguration', function(e) {
 Pebble.addEventListener("webviewclosed", function(e) {
     console.log("configuration closed");
     if (e.response != '') {
-		console.log('Response' + e.response);
 		var configuration = JSON.parse(decodeURIComponent(e.response));
 		console.log('subscriptions' + configuration.subscriptions);
 		var subscriptions = configuration.subscriptions;
@@ -29,8 +28,6 @@ Pebble.addEventListener("webviewclosed", function(e) {
 		Pebble.timelineSubscriptions(
 	    	function (topics) {
 	    	
-          console.log('Current Topics' + topics);
-          
 	    		// First go through current topics and see if we need to remove any
 	    		for (var t = 0; t < topics.length; t++) {
 	    			var topic = topics[t];
@@ -51,8 +48,6 @@ Pebble.addEventListener("webviewclosed", function(e) {
 					var subscription = subscriptions[s];
 	    			// If our subscription isn't found then subscribe to him
 	    			if (topics.indexOf(subscription) == -1) {
-              
-              console.log('Subscribing to:' + subscription);
               
 	 		    		Pebble.timelineSubscribe(subscription,
 				    		function () { 
