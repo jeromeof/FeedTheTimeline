@@ -1,21 +1,22 @@
 Pebble.addEventListener("ready", function(e) {
     console.log("Ready");
+    Pebble.addEventListener('showConfiguration', function(e) {
+      console.log("config");
+        Pebble.getTimelineToken(
+          function (token) {
+            var URL = 'http://feedthetimeline.appspot.com/config?token=' + token;
+            console.log('Configuration window opened. ' + URL);
+            Pebble.openURL(URL);
+          },
+          function (error) { 
+             console.log('Error getting timeline token: ' + error);
+          }
+      );
+
+   });
 });
 
-Pebble.addEventListener('showConfiguration', function(e) {
-    console.log("config");
-      Pebble.getTimelineToken(
-       function (token) {
-        var URL = 'http://feedthetimeline.appspot.com/config?token=' + token;
-        console.log('Configuration window opened. ' + URL);
-        Pebble.openURL(URL);
-     },
-       function (error) { 
-          console.log('Error getting timeline token: ' + error);
-     }
-	);
 
-});
 
 function timelineSubscribe(subscription) {
       Pebble.timelineSubscribe(subscription,
